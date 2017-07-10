@@ -1,0 +1,47 @@
+<div ng-controller="ShowPhySwitchCtrl">
+	<div class="widget-box transparent invoice-box">
+	    <div class="widget-header">
+        	<h3>业务标识: {{phySwitch.appId}}</h3>
+    	</div>
+    	<div class="widget-main no-padding">
+    	    <div class="col-xs-12 text-center" ng-show="isLoading">
+	        	<div id="loading" class="loading" style="color: #000000;width: auto">loading</div>
+	    	</div>
+			<div class="col-xs-12">
+		    	<alert ng-show="data.isShow" type="data.type" close="closeAlert()">{{data.msg}}</alert>
+			</div>
+			
+			<div class="container-fluid" style="padding-top: 20px;padding-left:100px">
+				<form class="form-horizontal">
+				
+					<div class="form-group">            
+						<label for="switchStatus" class="col-sm-3 control-label no-padding-right">开关状态</label>
+						
+			            <div class="col-sm-7">
+			                <select type="text" class="form-control" ng-model="phySwitch.switchStatus">
+			                	<option value="1">打开</option>
+			                	<option value="0">关闭</option>
+                			</select>
+			            </div>
+			        </div>
+					
+					<div class="col-sm-11" >
+				  		<div class="form-actions center">
+							<button class="btn btn-info" type="button" ng-click="updatePhySwitch(phySwitch)">
+								<i class="icon-ok bigger-110"></i>
+														更新
+							</button>
+		
+								&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset" ng-click="closePhySwitch()">
+								<i class="icon-undo bigger-110"></i>
+														关闭
+							</button>
+						</div>
+	        		</div>
+				</form>
+			</div>
+			
+    	</div>
+	</div>
+</div>

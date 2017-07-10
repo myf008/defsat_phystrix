@@ -1,0 +1,166 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{data.title}}</h3>
+</div>
+<div class="col-xs-12">
+    	<alert ng-show="data.isShow" type="data.type" close="closeAlert()">{{data.msg}}</alert>
+</div>
+
+<div class="modal-body">
+	<form name="phyConfigform" class="form-horizontal">
+		<div class="form-group">
+			<label for="appid" class="col-sm-3 control-label no-padding-right">业务标识</label>
+
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="appid" placeholder="appId" ng-model="phyConfig.appId" required/>
+                <div class="error" ng-show="phyConfigform.appid.$dirty && phyConfigform.appid.$invalid">
+					<div class="error" style="color:red; ng-show="phyConfigform.appid.$error.required">
+						appId不能为空
+					</div> 
+				</div>
+             </div>
+		</div>
+		
+		<div class="form-group">            
+			<label for="commandKey" class="col-sm-3 control-label no-padding-right">commandKey</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="commandKey" class="form-control" ng-model="phyConfig.commandKey" required/>
+                <div class="error" ng-show="phyConfigform.commandKey.$dirty && phyConfigform.commandKey.$invalid">
+					<div class="error" style="color:red; ng-show="phyConfigform.commandKey.$error.required">
+						commandKey不能为空
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="commandGroup" class="col-sm-3 control-label no-padding-right">commandGroup</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="commandGroup" class="form-control" ng-model="phyConfig.commandGroup" required/>
+                <div class="error" ng-show="phyConfigform.commandGroup.$dirty && phyConfigform.commandGroup.$invalid">
+					<div class="error" style="color:red; ng-show="phyConfigform.commandGroup.$error.required">
+						commandGroup不能为空
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="fallback" class="col-sm-3 control-label no-padding-right">fallback</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="fallback" class="form-control" ng-model="phyConfig.fallback" required/>
+                <div class="error" ng-show="phyConfigform.fallback.$dirty && phyConfigform.fallback.$invalid">
+					<div class="error"  style="color:red; ng-show="phyConfigform.fallback.$error.required">
+						fallback不能为空
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="isolationStgy" class="col-sm-3 control-label no-padding-right">isolationStgy</label>
+			
+            <div class="col-sm-7">
+                <select type="text" name="isolationStgy" class="form-control" ng-model="phyConfig.isolationStgy" required>
+            		<option value="SEMAPHORE">SEMAPHORE</option>
+                	<option value="THREAD">THREAD</option>
+                </select>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="maxRequest" class="col-sm-3 control-label no-padding-right">maxRequest</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="maxRequest" class="form-control" ng-model="phyConfig.maxRequest" ng-pattern="/^[0-9]*$/" required/>
+            	<div class="error" style="color:red; ng-show="phyConfigform.maxRequest.$dirty && phyConfigform.maxRequest.$invalid">
+					<div class="error"  ng-show="phyConfigform.maxRequest.$error.required">
+						maxRequest不能为空
+					</div> 
+					<div class="error" ng-show="phyConfigform.maxRequest.$error.pattern">
+						只能是数字
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="timeout" class="col-sm-3 control-label no-padding-right">timeout</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="timeout" class="form-control" ng-model="phyConfig.timeout" ng-pattern="/^[0-9]*$/" required/>
+            	<div class="error" style="color:red; ng-show="phyConfigform.timeout.$dirty && phyConfigform.timeout.$invalid">
+					<div class="error"  ng-show="phyConfigform.timeout.$error.required">
+						timeout不能为空
+					</div> 
+					<div class="error" ng-show="phyConfigform.timeout.$error.pattern">
+						只能是数字
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="threadPoolSize" class="col-sm-3 control-label no-padding-right">threadPoolSize</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="threadPoolSize" class="form-control" ng-model="phyConfig.threadPoolSize" ng-pattern="/^[0-9]*$/" required/>
+            	<div class="error" style="color:red; ng-show="phyConfigform.threadPoolSize.$dirty && phyConfigform.threadPoolSize.$invalid">
+					<div class="error"  ng-show="phyConfigform.threadPoolSize.$error.required">
+						threadPoolSize不能为空
+					</div> 
+					<div class="error" ng-show="phyConfigform.threadPoolSize.$error.pattern">
+						只能是数字
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="requestThreshold" class="col-sm-3 control-label no-padding-right">requestThreshold</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="requestThreshold" class="form-control" ng-model="phyConfig.requestThreshold" ng-pattern="/^[0-9]*$/" required/>
+            	<div class="error" style="color:red; ng-show="phyConfigform.requestThreshold.$dirty && phyConfigform.requestThreshold.$invalid">
+					<div class="error"  ng-show="phyConfigform.requestThreshold.$error.required">
+						requestThreshold不能为空
+					</div>
+					<div class="error"  ng-show="phyConfigform.requestThreshold.$error.pattern">
+						只能是数字
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="errorThreshold" class="col-sm-3 control-label no-padding-right">errorThreshold</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="errorThreshold" class="form-control" ng-model="phyConfig.errorThreshold" ng-pattern="/^[0-9]*$/" required/>
+            	<div class="error" style="color:red; ng-show="phyConfigform.errorThreshold.$dirty && phyConfigform.errorThreshold.$invalid">
+					<div class="error"  ng-show="phyConfigform.errorThreshold.$error.required">
+						errorThreshold不能为空
+					</div>
+					<div class="error"  ng-show="phyConfigform.errorThreshold.$error.pattern">
+						只能是数字
+					</div> 
+				</div>
+            </div>
+        </div>
+		<div class="form-group">            
+			<label for="circuitBreakTime" class="col-sm-3 control-label no-padding-right">circuitBreakTime</label>
+			
+            <div class="col-sm-7">
+                <input type="text" name="circuitBreakTime" class="form-control" ng-model="phyConfig.circuitBreakTime" ng-pattern="/^[0-9]*$/" required/>
+            	<div class="error" style="color:red; ng-show="phyConfigform.circuitBreakTime.$dirty && phyConfigform.circuitBreakTime.$invalid">
+					<div class="error" ng-show="phyConfigform.circuitBreakTime.$error.required">
+						circuitBreakTime不能为空
+					</div>
+					<div class="error" ng-show="phyConfigform.circuitBreakTime.$error.pattern">
+						只能是数字
+					</div> 
+				</div>
+            </div>
+        </div>
+		
+	</form>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="addPhyConfig()">确定</button>
+	<button class="btn btn-warning" ng-click="cancel()">取消</button>
+</div>

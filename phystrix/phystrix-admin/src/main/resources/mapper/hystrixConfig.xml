@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.defsat.phystrix.admin.dao.daointerface.HystrixConfigDAO">
+
+	<resultMap id="hystrixConfigMap" type="hystrixconfigdo">
+		<id property="id" column="id" />
+		<result property="appId" column="app_id" />
+		<result property="commandKey" column="command_key" />
+		<result property="commandGroup" column="command_group" />
+		<result property="fallback" column="fallback" />
+		<result property="isolationStgy" column="isolationStgy" />
+		<result property="maxRequest" column="maxRequest" />
+		<result property="timeout" column="timeout" />
+		<result property="threadPoolSize" column="threadPoolSize" />
+		<result property="requestThreshold" column="requestThreshold" />
+		<result property="errorThreshold" column="errorThreshold" />
+		<result property="circuitBreakTime" column="circuitBreakTime" />
+		<result property="creatTime" column="create_time" />
+		<result property="modifyTime" column="modify_time" />
+	</resultMap>
+
+	<sql id="columns">
+		id,app_id,command_key,command_group,fallback,isolationStgy,maxRequest,timeout,
+		threadPoolSize,requestThreshold,errorThreshold,circuitBreakTime,create_time,modify_time
+	</sql>
+	
+	<select id="getAll" resultMap="hystrixConfigMap">
+		select
+		<include refid="columns" />
+		from hystrix_config
+	</select>
+	
+	<select id="get" parameterType="String" resultMap="hystrixConfigMap">
+		select
+		<include refid="columns" />
+		from hystrix_config
+		where app_id = #{appId}
+	</select>
+	
+	<select id="getByCommandKey" resultMap="hystrixConfigMap">
+		select
+		<include refid="columns" />
+		from hystrix_config
+		where app_id = #{0} and
+		command_key = #{1}
+	</select>
+	
+	<insert id="insert" parameterType="hystrixconfigdo">
+		insert ignore into hystrix_config
+		(app_id,command_key,command_group,fallback,isolationStgy,maxRequest,timeout,
+		threadPoolSize,requestThreshold,errorThreshold,circuitBreakTime,create_time,modify_time)
+		values
+		(#{appId}, #{commandKey}, #{commandGroup},#{fallback},
+		#{isolationStgy},#{maxRequest},#{timeout}, #{threadPoolSize},#{requestThreshold},
+		#{errorThreshold},#{circuitBreakTime},now(), now())
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete from
+		hystrix_config
+		where app_id = #{appId}
+	</delete>
+	
+	<delete id="delOne" parameterType="String">
+		delete from
+		hystrix_config
+		where app_id = #{0} and
+		command_key = #{1}
+	</delete>
+
+	<update id="update" parameterType="hystrixconfigdo">
+		update
+		hystrix_config
+		set
+		command_group = #{commandGroup},
+		fallback = #{fallback},
+		isolationStgy = #{isolationStgy},
+		maxRequest = #{maxRequest},
+		timeout = #{timeout},
+		threadPoolSize = #{threadPoolSize},
+		requestThreshold = #{requestThreshold},
+		errorThreshold = #{errorThreshold},
+		circuitBreakTime = #{circuitBreakTime},
+		modify_time = now()
+		where app_id = #{appId} and
+		command_key = #{commandKey}
+	</update>
+
+</mapper> 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.defsat.phystrix.admin.dao.daointerface.HystrixSwitchDAO">
+
+	<resultMap id="hystrixSwitchMap" type="hystrixswitchdo">
+		<id property="id" column="id" />
+		<result property="appId" column="app_id" />
+		<result property="switchStatus" column="switch_status" />
+		<result property="creatTime" column="create_time" />
+		<result property="modifyTime" column="modify_time" />
+	</resultMap>
+
+	<sql id="columns">
+		id,app_id,switch_status,create_time,modify_time
+	</sql>
+	
+	<select id="get" parameterType="String" resultMap="hystrixSwitchMap">
+		select
+		<include refid="columns" />
+		from hystrix_switch
+		where app_id = #{appId}
+	</select>
+	
+	<select id="getAll" resultMap="hystrixSwitchMap">
+		select
+		<include refid="columns" />
+		from hystrix_switch
+	</select>
+	
+	<insert id="insert" parameterType="hystrixswitchdo">
+		insert ignore into hystrix_switch
+		(app_id,switch_status,create_time,modify_time)
+		values
+		( #{appId}, #{switchStatus}, now(), now() )
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete from
+		hystrix_switch
+		where app_id = #{appId}
+	</delete>
+
+	<update id="update" parameterType="hystrixswitchdo">
+		update
+		hystrix_switch
+		set
+		switch_status = #{switchStatus},
+		modify_time = now()
+		where app_id = #{appId}
+	</update>
+
+</mapper> 

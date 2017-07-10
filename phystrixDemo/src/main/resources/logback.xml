@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="false">
+	<property name="appName" value="phystrixDemo" />   
+	<property name="logbase" value="./logs" />   
+    <contextName>${appName}</contextName> 
+    
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS},%-5level,%logger{72} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logbase}/${appName}/error_%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>5MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS},%-5level,%logger{72} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="phstrix" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logbase}/${appName}/phstrix_%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>5MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS},%-5level,%logger{72} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+		
+
+	<root level="info">
+		<appender-ref ref="console" />
+		<appender-ref ref="phstrix" />
+	</root>
+
+	<logger name="com.defsat.phystrix" level="INFO" additivity="false">
+		<appender-ref ref="console" />
+		<appender-ref ref="phstrix" />
+		<appender-ref ref="error" />
+	</logger>
+	
+	<logger name="com.defsat.phystrixDemo" level="INFO" additivity="false">
+		<appender-ref ref="console" />
+		<appender-ref ref="phstrix" />
+		<appender-ref ref="error" />
+	</logger>
+
+</configuration>
